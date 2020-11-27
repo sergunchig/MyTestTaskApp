@@ -1,0 +1,49 @@
+﻿@model IEnumerable<MyTestTaskApp.Models.Provider>
+<link rel="stylesheet" type="text/css" href="~/Content/Index.css" />
+<div class="jumbotron">
+    <h3>Orders</h3>
+    <select id="providerFilter" multiple size="3">
+        @foreach (var prvr in Model)
+        {
+            <option>@prvr.Name</option>
+        }
+    </select>
+    <input type="button" id="filterBtn" value="Применить" onclick=fBtnClick() />
+    <br />
+    <label>added filters: @ViewBag.addedFilters</label>
+    <hr />
+    <table style="border: inherit thin">
+        <thead>
+            <tr>
+                <th>Order</th>
+                <th>Date</th>
+                <th>Provider</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            @foreach (var ov in ViewBag.Orders)
+            {
+                <tr onclick=orderClick("@ov.Number")>
+                    <td>@ov.Number</td>
+                    <td>@ov.Date</td>
+                    <td>@Model.First(p=> p.id == ov.ProviderId).Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+    <input type="button" value="add" onclick="location.href = '@Url.Action("AddOrder", "Home")'" />
+</div>
+<script>
+    const fBtnClick = () => {
+        filters = '';
+        Array.from(document.getElementById("providerFilter").selectedOptions).forEach(item => filters = filters + "|" + item.value);
+        url = "/Home/Index?filters=" + filters;
+        window.location.href = url;
+    }
+
+    const orderClick = (order) => {
+        url = "/Home/OrderInformation?order=" + order;
+        window.location.href = url;
+    }
+</script>

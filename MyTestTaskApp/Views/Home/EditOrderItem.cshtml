@@ -1,0 +1,30 @@
+﻿@model MyTestTaskApp.Models.OrderItem
+@{
+    ViewBag.Title = "AddOrderItem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddOrderItem</h2>
+
+<form method="post">
+    <input type="hidden" name="id" value=@Model.id />
+    <label>Name</label>
+    <br />
+    <input type="text" name="Name" value=@Model.Name />
+    <br />
+    <label>Quantity</label>
+    <br />
+    <input type="text" name="Quantity" value=@Model.Quantity />
+    <br />
+    <label>Unit</label>
+    <br />
+    <input type="text" name="Unit" value=@Model.Unit />
+    <input type="hidden" name="OrderId" value=@Model.OrderId />
+    <br />
+    <input type="submit" value="save" />
+</form>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

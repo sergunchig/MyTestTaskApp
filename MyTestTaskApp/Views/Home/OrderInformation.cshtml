@@ -1,0 +1,67 @@
+﻿@model MyTestTaskApp.Models.Order
+@{
+    ViewBag.Title = "OrderInformation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>OrderInformation</h2>
+
+<form method="post">
+    <label>Date</label>
+    <br />
+    <input type="text" name="Date" value=@Model.Date />
+    <br />
+    <label>Number</label>
+    <br />
+    <input type="text" name="Number" value=@Model.Number />
+    <input type="hidden" name="OldNum" value="@Model.Number" />
+    <br />
+    <label>Provider</label>
+    <br />
+    <select name="ProviderName">
+        @foreach (var sel in ViewBag.Providers)
+        {
+            if (sel.id.Equals(Model.ProviderId))
+            {
+                <option selected id="@sel.Name">@sel.Name</option>
+            }
+            else
+            {
+                <option id="@sel.Name">@sel.Name</option>
+            }
+        }
+    </select>
+
+    <input type="submit" value="Edit" />
+</form>
+<hr />
+<table id="orderInfo">
+    <thead>
+        <tr>
+            <th> Name </th>
+            <th> Quantity </th>
+            <th> Unit </th>
+            <th> </th>
+            <th> </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderItem)
+        {
+        <tr>
+            <td> @item.Name </td>
+            <td> @item.Quantity </td>
+            <td> @item.Unit </td>
+            <td>@Html.ActionLink("edit", "EditOrderItem", "Home", new { item = item.id, order = item.OrderId }, null)</td>
+            <td>@Html.ActionLink("Delete", "DeleteItem", "Home", new { item = item.id, order = item.OrderId }, null)</td>
+        </tr>
+        }
+    </tbody>
+</table>
+<input type="button" value="add Item" onclick="location.href = '@Url.Action("AddOrderItem", "Home", new {orderId = Model.id })'" />
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<script>
+
+</script>

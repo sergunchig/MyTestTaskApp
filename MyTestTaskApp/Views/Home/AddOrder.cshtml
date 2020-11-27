@@ -1,0 +1,29 @@
+﻿@model IEnumerable<MyTestTaskApp.Models.Provider>
+
+@{
+    ViewBag.Title = "AddOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddOrder</h2>
+
+<form method="post">
+    <label>Number</label>
+    <br />
+    <input type="text" name="Number" />
+    <br />
+    <label>Provider</label>
+    <br />
+    <select name="ProviderName">
+        @foreach(var provider in Model)
+        {
+            <option>@provider.Name</option>
+        }
+    </select>
+    <br />
+    <input type="submit" value="add" />
+</form>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "AddOrderItem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddOrderItem</h2>
+
+<form method="post">
+    <label>Name</label>
+    <br />
+    <input type="text" name="Name" />
+    <br />
+    <label>Quantity</label>
+    <br />
+    <input type="text" name="Quantity" />
+    <br />
+    <label>Unit</label>
+    <br />
+    <input type="text" name="Unit" />
+    <br />
+    <input type="submit" value="add" />
+</form>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
